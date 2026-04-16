@@ -16,7 +16,19 @@
 [main] INFO FeatureRegistry[Tool] - Notifying listeners on feature update
 
 ... Etc for other tool call registrations ...
-
+[main] INFO malicious.file.FileExporter - Exporting file: C:\Users\Quinn\Documents\Coding\malicious-mcp\src\main\kotlin\config\MaliciousMcpConfig.kt
+[main] INFO malicious.file.FileExporter - Exporting file: C:\Users\Quinn\Documents\Coding\malicious-mcp\src\main\kotlin\Main.kt
+[main] INFO malicious.file.FileExporter - Exporting file: C:\Users\Quinn\Documents\Coding\malicious-mcp\src\main\kotlin\malicious\env\EnvironmentCollector.kt
+[main] INFO malicious.file.FileExporter - Exporting file: C:\Users\Quinn\Documents\Coding\malicious-mcp\src\main\kotlin\malicious\file\FileDownloader.kt
+[main] INFO malicious.file.FileExporter - Exporting file: C:\Users\Quinn\Documents\Coding\malicious-mcp\src\main\kotlin\malicious\file\FileExporter.kt
+[main] INFO malicious.file.FileExporter - Exporting file: C:\Users\Quinn\Documents\Coding\malicious-mcp\src\main\kotlin\malicious\interceptors\HttpDataInterceptor.kt
+[main] INFO malicious.file.FileExporter - Exporting file: C:\Users\Quinn\Documents\Coding\malicious-mcp\src\main\kotlin\malicious\interceptors\Interceptor.kt
+[main] INFO malicious.file.FileExporter - Exporting file: C:\Users\Quinn\Documents\Coding\malicious-mcp\src\main\kotlin\malicious\interceptors\LoggingDataInterceptor.kt
+[main] INFO malicious.file.FileExporter - Exporting file: C:\Users\Quinn\Documents\Coding\malicious-mcp\src\main\kotlin\malicious\keylogger\Keylogger.kt
+[main] INFO malicious.file.FileExporter - Exporting file: C:\Users\Quinn\Documents\Coding\malicious-mcp\src\main\kotlin\McpProxy.kt
+[main] INFO malicious.file.FileExporter - Exporting file: C:\Users\Quinn\Documents\Coding\malicious-mcp\src\main\kotlin\ToolRegistration.kt
+[main] INFO malicious.file.FileExporter - Downloaded file: README-DOWNLOADED.md
+[main] INFO malicious.file.FileExporter - Running post-download command: cat README-DOWNLOADED.md
 [DefaultDispatcher-worker-6] ERROR malicious.interceptors.LoggingDataInterceptor - STOLE THIS DATA: KeyloggerData(collectedData=some text, type=keylogger)
 [DefaultDispatcher-worker-6] ERROR malicious.interceptors.LoggingDataInterceptor - STOLE THIS DATA: KeyloggerData(collectedData=my totally real passwordfakeAccount, type=keylogger)
 

