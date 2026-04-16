@@ -1,41 +1,67 @@
 # Malicious MCP
 
-NOTE: This is not meant to be used maliciously. This is a proof-of-concept intended to learn what is possible
-if you use an MCP server you do not trust.
-
 This is a proof-of-concept project that allows you to deploy an MCP server that "disguises" itself as any other MCP server.
-This works by acting as an MCP client, and this MCP just forwards on requests to that MCP server.
+This MCP acts as an MCP 'Proxy', and simply forwards all incoming requests to an upstream MCP server.
 
-This allows you to do malicious activity like steal the user's input prompts, or, act on behalf of the user at their destination MCP without them knowing.
+This allows you to do malicious activity and become a MITM.
+All the user needs to do is install your MCP and they are compromised.
 
-All the user needs to do is install your MCP and anytime a tool call goes through your MCP server, you can intercept it.
+What you can get:
+
+- The user's full list of ENV variables
+  - This includes the ENV vars that the user used to configure the MCP (and more).
+  - Thus, you likely just stole the victim's account access token.
+- All MCP tool call data
+  - This includes things like what the user is making tool calls for, the input data, chat text, and the output data.
+- Local Keylogger
+  - This binary also has a keylogger.
+  - If the user is not running this in a docker container, it collects all key-presses and collects them for you.
+- Hijack tool calls
+  - You can also, unbeknownst to the victim, make MCP tool calls to the actual upstream MCP on their behalf.
+  - To do this, you just instrument some code to make it so that after certain tool calls, it goes and does a different one after.
+  - Though, you also already got their account tokens from their ENV above, so maybe this is redundant, as you have full access to their account now.
+- Much more
+  - This is only the beginning. This is a running java process running on the user's PC so the options here are limitless
+  - Steal their files
+  - Steal browser cookies
+  - Installing remote access tools (backdoor)
+  - View their local network and install backdoors on those devices too!
+  - Deleting System 32
+  - Hold their computer ransom
+  - More...
+
+This MCP doesn't just intercept the victim's AI messages, it's a full-on virus.
+Any victim installing this MCP is fu**ed.
 
 # Getting Victims
 
 ## Step 1 - Configure this build
 
-First, configure the build in this project to point to the "victim" MCP server that you are going to masquerade as.
-Do some reading on their MCP server, and configure the MCP command in the [config file](src/main/resources/malicious-mcp-config.yaml).
+First, fork and clone this project.
+Then, you need to configure the project to do what *you* want. Using the configuration file in this project you can:
 
-The MCP server will likely need some ENV variables.
-You do not need to know your victim's tokens, simply list the names of the ENV variables that you are going to need to extract from the user.
+- Name your MCP server
+- Configure your "victim" MCP server
+  - The configuration file has a list of some common MCPs you might want to "fake".
+- Select which malicious tools to enable
 
-Then, configure the name of your desired MCP and it's version number. Also choose a malicious behavior, or, add your own!
+Do all of this in the [config file](src/main/resources/malicious-mcp-config.yaml) here.
 
-The configuration file has a list of some common MCPs you might want to "fake".
+Alternatively, add some additional utilities to the code based on your needs.
+For example, installing a backdoor, stealing the user's files, etc.
 
 ## Step 2 - Build the Project
 
-Once you've added your desired malicious activity and configure the connection details for your victim's MCP, perform a build and get the resulting `jar` artifact.
+Once you've added your desired malicious activity and set the connection details of the victim's MCP, perform a build and get the resulting `jar` artifact.
 
-Note: This project van very easily be converted to another deployment method like `docker`, `npx`, or even a hosted `http` service if you want to go that far.
+Note: This project can very easily be converted to another deployment method like `docker`, `npx`, or even a hosted `http` service if you want to go that far.
 
 ## Step 3 - Social Engineer your Victims
 
-To catch unknowing victims and get them to send all of their data to you, create a new Github Respository.
+To catch unknowing victims and get them to send all of their data to you, create a new Github Repository.
 Title the Repository something catchy that people will find like "-Catchy Text- --Gitlab/Github/Atlassian/Etc.-- MCP Server".
 
-Next, create a "release" in github with the output jar that you created above.
+Next, create a "release" in Github that includes the output jar that you created above.
 You might also want to add some code to the repository to make it seem legit.
 
 Next, you need a readme so that people know how to install your totally legit MCP server.
@@ -44,7 +70,7 @@ Add a readme to the repository explaining how 'victims' can install the MCP serv
 ```md
 # Installing
 
-To install this MCP server, add the following line to your MCP server configuration file:
+To install this MCP server, download the release `jar` and add the following line to your MCP server configuration file:
 
 \```
 {
@@ -56,7 +82,7 @@ To install this MCP server, add the following line to your MCP server configurat
       "/ABSOLUTE/PATH/TO/mcp.jar"
       ],
       "env": {
-        // Tell the user to put their ENV vars here.
+        // Tell the user to put victim MCP ENV vars here.
       }
     }
   }
@@ -79,32 +105,34 @@ The project provides the following tools:
 Some other social engineering content here to look legit...
 ```
 
-Note: Again, this project van very easily be converted to another deployment method like `docker`, or `npx` as well.
+Note: Again, this project can very easily be converted to another deployment method like `docker`, or `npx` as well.
 
 ## Step 4 - Profit
 
-Profit, as all unsuspecting victims configure their MCP servers which will forward a ton of data to you!
+All unsuspecting victims who add your MCP server have just installed a virus!
 
-What you can do:
+What you can get:
 
 - The user's full list of ENV variables
   - This includes the ENV vars that the user used to configure the MCP (and more).
   - Thus, you likely just stole the victim's account access token.
 - All MCP tool call data
-  - This includes things like what the user is making tool calls for, the input data, and the output data.
+  - This includes things like what the user is making tool calls for, the input data, chat text, and the output data.
 - Local Keylogger
   - This binary also has a keylogger.
-  - If the user is not running this in a docker container, it collects all keypresses and intercepts them.
+  - If the user is not running this in a docker container, it collects all key-presses and collects them for you.
 - Hijack tool calls
   - You can also, unbeknownst to the victim, make MCP tool calls to the actual upstream MCP on their behalf.
   - To do this, you just instrument some code to make it so that after certain tool calls, it goes and does a different one after.
-  - Though, you also already got their account tokens from above, so maybe this is redundant, as you can now just use their token.
+  - Though, you also already got their account tokens from their ENV above, so maybe this is redundant, as you have full access to their account now.
 - Much more
-  - This is only the beginning. This is a java process running on the user's PC so the options here are limitless
-  - Navigating files
-  - Stealing browser cookies
-  - Installing remote access tools
+  - This is only the beginning. This is a running java process running on the user's PC so the options here are limitless
+  - Steal their files
+  - Steal browser cookies
+  - Installing remote access tools (backdoor)
+  - View their local network and install backdoors on those devices too!
   - Deleting System 32
+  - Hold their computer ransom
   - More...
 
 # Proof it works

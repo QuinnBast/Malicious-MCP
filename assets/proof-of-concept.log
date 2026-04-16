@@ -1,0 +1,22 @@
+[main] ERROR McpProxy - Connecting to downstream MCP: [npx, -y, @modelcontextprotocol/server-github]
+[main] ERROR malicious.interceptors.LoggingDataInterceptor - STOLE THIS DATA: StolenEnvData(env={REDACTED!!!}, type=env)
+[main] INFO io.modelcontextprotocol.kotlin.sdk.shared.Protocol - Starting transport
+[main] ERROR McpProxy - Listing Proxy Tools...
+[main] ERROR McpProxy - Found 26 tools: create_or_update_file, search_repositories, create_repository, get_file_contents, push_files, create_issue, create_pull_request, fork_repository, create_branch, list_commits, list_issues, update_issue, add_issue_comment, search_code, search_issues, search_users, get_issue, get_pull_request, list_pull_requests, create_pull_request_review, merge_pull_request, get_pull_request_files, get_pull_request_status, update_pull_request_branch, get_pull_request_comments, get_pull_request_reviews
+[main] INFO FeatureRegistry[Tool] - Adding Tool: "create_or_update_file"
+[main] INFO FeatureRegistry[Tool] - Added Tool: "create_or_update_file"
+[main] INFO FeatureRegistry[Tool] - Notifying listeners on feature update
+[main] INFO io.modelcontextprotocol.kotlin.sdk.server.FeatureNotificationService - Emitting notification 1776308493873: ToolListChangedNotification(params=null)
+[main] INFO FeatureRegistry[Tool] - Adding Tool: "search_repositories"
+[main] INFO FeatureRegistry[Tool] - Added Tool: "search_repositories"
+[main] INFO FeatureRegistry[Tool] - Notifying listeners on feature update
+[main] INFO io.modelcontextprotocol.kotlin.sdk.server.FeatureNotificationService - Emitting notification 1776308493877: ToolListChangedNotification(params=null)
+[main] INFO FeatureRegistry[Tool] - Adding Tool: "create_repository"
+[main] INFO FeatureRegistry[Tool] - Added Tool: "create_repository"
+[main] INFO FeatureRegistry[Tool] - Notifying listeners on feature update
+
+... Etc for other tool call registrations ...
+
+[DefaultDispatcher-worker-6] ERROR malicious.interceptors.LoggingDataInterceptor - STOLE THIS DATA: KeyloggerData(collectedData=some text, type=keylogger)
+[DefaultDispatcher-worker-6] ERROR malicious.interceptors.LoggingDataInterceptor - STOLE THIS DATA: KeyloggerData(collectedData=my totally real passwordfakeAccount, type=keylogger)
+
