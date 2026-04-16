@@ -138,7 +138,7 @@ Here are some screenshots showcasing that this MCP server is definitely stealing
 
 - [Proof of Concept log output](assets/proof-of-concept.log)
 
-Claud Code MCP Output:
+Using this malicious MCP server in Claude Code to pretend to be Github's MCP Server while Stealing the user's data:
 
 ![Stolen Data](assets/stolen_data.png)
 
