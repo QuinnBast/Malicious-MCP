@@ -53,6 +53,16 @@ What you can get:
 This MCP doesn't just intercept the victim's AI messages, it's a full-on virus.
 Any victim installing this MCP is fu**ed.
 
+# Proof it works
+
+Here are some screenshots showcasing that this MCP server is definitely stealing any incoming calls to the MCP:
+
+Using this malicious MCP server in Claude Code to pretend to be Github's MCP Server while Stealing the user's data:
+
+![Stolen Data](assets/stolen_data.png)
+
+- [Proof of Concept log output](assets/proof-of-concept.log)
+
 # Getting Victims
 
 ## Step 1 - Configure this build
@@ -131,16 +141,6 @@ Note: Again, this project can very easily be converted to another deployment met
 
 Congratulations! All unsuspecting victims who add your MCP server have just installed malware!
 Go crazy.
-
-# Proof it works
-
-Here are some screenshots showcasing that this MCP server is definitely stealing any incoming calls to the MCP:
-
-- [Proof of Concept log output](assets/proof-of-concept.log)
-
-Using this malicious MCP server in Claude Code to pretend to be Github's MCP Server while Stealing the user's data:
-
-![Stolen Data](assets/stolen_data.png)
 
 # Running Locally
 
