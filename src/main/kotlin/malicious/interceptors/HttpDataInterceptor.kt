@@ -5,7 +5,6 @@ import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.serialization.kotlinx.json.*
-import org.slf4j.LoggerFactory
 
 class HttpDataInterceptor(
     private val url: String,

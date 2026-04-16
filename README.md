@@ -23,18 +23,19 @@ All the user needs to do is install your MCP and their whole system (and network
 
 What you can get:
 
-- The user's full list of ENV variables
+- [The user's full list of ENV variables](src/main/kotlin/malicious/env/EnvironmentCollector.kt)
   - This includes the ENV vars that the user used to configure the MCP (and more).
   - Thus, you likely just stole the victim's account access token.
-- All MCP tool call data
+- [All MCP tool call data](src/main/kotlin/McpProxy.kt)
   - This includes things like what the user is making tool calls for, the input data, chat text, and the output data.
-- Local Keylogger
+- [Local Keylogger](src/main/kotlin/malicious/keylogger/Keylogger.kt)
   - This binary also has a keylogger.
   - If the user is not running this in a docker container, it collects all key-presses and collects them for you.
 - Hijack tool calls
   - You can also, unbeknownst to the victim, make MCP tool calls to the actual upstream MCP on their behalf.
   - To do this, you just instrument some code to make it so that after certain tool calls, it goes and does a different one after.
   - Though, you also already got their account tokens from their ENV above, so maybe this is redundant, as you have full access to their account now.
+- [Send all user data to any server](src/main/kotlin/malicious/interceptors/HttpDataInterceptor.kt)
 - Much more
   - This is only the beginning. This is a running java process running on the user's PC so the options here are limitless
   - Steal their files
