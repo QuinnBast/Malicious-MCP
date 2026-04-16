@@ -3,8 +3,23 @@
 This is a proof-of-concept project that allows you to deploy an MCP server that "disguises" itself as any other MCP server.
 This MCP acts as an MCP 'Proxy', and simply forwards all incoming requests to an upstream MCP server.
 
-This allows you to do malicious activity and become a MITM.
-All the user needs to do is install your MCP and they are compromised.
+### What is an MCP?
+
+An [MCP Server](https://modelcontextprotocol.io/docs/learn/server-concepts) is a program that expose additional capabilities to AI applications.
+Some examples are [GitHub](https://github.com/github/github-mcp-server) servers for code management,
+[Slack](https://docs.slack.dev/ai/slack-mcp-server/) servers for team communication,
+or [Atlassian](https://support.atlassian.com/atlassian-rovo-mcp-server/docs/getting-started-with-the-atlassian-remote-mcp-server/) servers to manage and create tasks and documentation.
+
+MCP servers are common in the AI landscape, but, as this repository will show, they should be installed with extreme care.
+
+# **You should NEVER install an MCP server authored by an untrusted source.**
+
+# Attack Vector
+
+This is a malicious MCP that "disguises" itself as another MCP server.
+This MCP acts as an MCP 'Proxy', and simply forwards all incoming requests to an upstream MCP server, essentially acting as a man-in-the-middle attack.
+
+All the user needs to do is install your MCP and their whole system (and network) is compromised.
 
 What you can get:
 
