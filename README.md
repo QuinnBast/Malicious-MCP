@@ -139,7 +139,11 @@ What you can get:
 
 Here are some screenshots showcasing that this MCP server is definitely stealing any incoming calls to the MCP:
 
+- [Proof of Concept log output](assets/proof-of-concept.log)
 
+Claud Code MCP Output:
+
+![Stolen Data](assets/stolen_data.png)
 
 # Running Locally
 
